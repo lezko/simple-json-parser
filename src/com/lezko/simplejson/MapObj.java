@@ -35,9 +35,13 @@ public class MapObj extends Obj {
         return put(key, Obj.fromString(value));
     }
 
-    public static Obj fromString(String s) {
+    public static MapObj fromString(String s) {
         char[] a = s.toCharArray();
         MapObj mapObj = new MapObj();
+        if (a.length == 0) {
+            return mapObj;
+        }
+
         // todo check sequence if its correct
         int l = 0, r, k = 0;
         k += a[0] == '[' || a[0] == '{' ? 1 : 0;
@@ -47,7 +51,8 @@ public class MapObj extends Obj {
                 if (key == null) {
                     key = s.substring(l, r);
                 } else {
-                    mapObj.put(key, s.substring(l, r));
+                    mapObj.put(key.trim(), s.substring(l, r));
+                    key = null;
                 }
                 l = r + 1;
             } else if (a[r] == '[' || a[r] == '{') {
@@ -56,9 +61,7 @@ public class MapObj extends Obj {
                 k--;
             }
         }
-        if (!s.isEmpty()) {
-            mapObj.put(key, s.substring(l, r));
-        }
+        mapObj.put(key.trim(), s.substring(l, r));
         return mapObj;
     }
 
@@ -72,5 +75,10 @@ public class MapObj extends Obj {
         }
         sb.append("}");
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Map.Entry<String, Obj>> iterator() {
+        return map.entrySet().iterator();
     }
 }

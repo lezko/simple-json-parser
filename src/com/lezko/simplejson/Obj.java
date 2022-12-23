@@ -1,8 +1,9 @@
 package com.lezko.simplejson;
 
 import java.util.Iterator;
+import java.util.Map;
 
-public class Obj implements Iterable<Obj> {
+public class Obj implements Iterable<Map.Entry<String, Obj>> {
 
     enum Type {
         MAP,
@@ -49,7 +50,7 @@ public class Obj implements Iterable<Obj> {
     }
 
     @Override
-    public Iterator<Obj> iterator() {
+    public Iterator<Map.Entry<String, Obj>> iterator() {
         throw new RuntimeException("Operation Iterator() is not supported for object of type " + type);
     }
 

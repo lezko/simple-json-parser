@@ -1,11 +1,8 @@
 package com.lezko.simplejson;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
-public class ArrObj extends Obj implements Iterable<Obj> {
+public class ArrObj extends Obj {
 
     private final List<Obj> objects = new LinkedList<>();
 
@@ -34,9 +31,13 @@ public class ArrObj extends Obj implements Iterable<Obj> {
         return append(Obj.fromString(s));
     }
 
-    public static Obj fromString(String s) {
+    public static ArrObj fromString(String s) {
         char[] a = s.toCharArray();
         ArrObj arrObj = new ArrObj();
+        if (a.length == 0) {
+            return arrObj;
+        }
+
         // todo check sequence if its correct using stack
         // todo handle trailing comma
         int l = 0, r, k = 0;
@@ -51,9 +52,7 @@ public class ArrObj extends Obj implements Iterable<Obj> {
                 k--;
             }
         }
-        if (!s.isEmpty()) {
-            arrObj.append(s.substring(l, r));
-        }
+        arrObj.append(s.substring(l, r));
         return arrObj;
     }
 
@@ -70,7 +69,11 @@ public class ArrObj extends Obj implements Iterable<Obj> {
     }
 
     @Override
-    public Iterator<Obj> iterator() {
-        return objects.iterator();
+    public Iterator<Map.Entry<String, Obj>> iterator() {
+        Map<String, Obj> map = new HashMap<>();
+        for (int i = 0; i < objects.size(); i++) {
+            map.put(String.valueOf(i), objects.get(i));
+        }
+        return map.entrySet().iterator();
     }
 }

@@ -24,7 +24,7 @@ public class StrObj extends Obj {
         return s;
     }
 
-    public static Obj fromString(String s) {
+    public static StrObj fromString(String s) {
         return new StrObj(s.trim());
     }
 
