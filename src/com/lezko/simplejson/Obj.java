@@ -1,6 +1,7 @@
 package com.lezko.simplejson;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Obj implements Iterable<Map.Entry<String, Obj>> {
@@ -17,6 +18,7 @@ public class Obj implements Iterable<Map.Entry<String, Obj>> {
         this.type = type;
     }
 
+    // map
     public Obj get(String s) {
         throw new RuntimeException("Operation get(String s) is not supported for object of type " + type);
     }
@@ -29,6 +31,7 @@ public class Obj implements Iterable<Map.Entry<String, Obj>> {
         throw new RuntimeException("Operation put(String key, String value) is not supported for object of type " + type);
     }
 
+    // array
     public Obj get(Integer i) {
         throw new RuntimeException("Operation get(Integer) is not supported for object of type " + type);
     }
@@ -41,6 +44,11 @@ public class Obj implements Iterable<Map.Entry<String, Obj>> {
         throw new RuntimeException("Operation append(String s) is not supported for object of type " + type);
     }
 
+    public List<String> toList() {
+        throw new RuntimeException("Operation toList() is not supported for object of type " + type);
+    }
+
+    // string
     public String val() {
         throw new RuntimeException("Operation val() is not supported for object of type " + type);
     }

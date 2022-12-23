@@ -69,6 +69,11 @@ public class ArrObj extends Obj {
     }
 
     @Override
+    public List<String> toList() {
+        return objects.stream().map(Obj::toString).toList();
+    }
+
+    @Override
     public Iterator<Map.Entry<String, Obj>> iterator() {
         Map<String, Obj> map = new HashMap<>();
         for (int i = 0; i < objects.size(); i++) {
