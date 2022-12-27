@@ -69,8 +69,8 @@ public class ArrObj extends Obj {
     }
 
     @Override
-    public List<String> toList() {
-        return objects.stream().map(Obj::toString).toList();
+    public List<Obj> toList() {
+        return objects;
     }
 
     @Override

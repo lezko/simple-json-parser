@@ -44,7 +44,7 @@ public class Obj implements Iterable<Map.Entry<String, Obj>> {
         throw new RuntimeException("Operation append(String s) is not supported for object of type " + type);
     }
 
-    public List<String> toList() {
+    public List<Obj> toList() {
         throw new RuntimeException("Operation toList() is not supported for object of type " + type);
     }
 
